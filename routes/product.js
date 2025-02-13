@@ -9,7 +9,7 @@ const { authCheck, adminCheck } = require('../middlewares/authCheck')
 //router
 router.post("/product", create)
 router.get("/products/:count", list)
-router.get("/products/:id", read)
+router.get("/product/:id", read)
 router.put("/product/:id", update)
 router.delete("/product/:id", remove)
 router.post("/productby", listby)

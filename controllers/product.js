@@ -36,25 +36,21 @@ exports.create = async (req, res) => {
 
 exports.read = async (req, res) => {
     try {
-        //code
+        // code
         const { id } = req.params
-        //console.log(id)
-        // console.log(typeof count)
-        const read = await prisma.product.findFirst(
-            {
-                where: {
-                    id: Number(id)
-                },
-                include: {
-                    category: true,
-                    images: true
-                }
+        const read = await prisma.product.findFirst({
+            where: {
+                id: Number(id)
+            },
+            include: {
+                category: true,
+                images: true
             }
-        )
+        })
         res.send(read)
     } catch (err) {
         console.log(err)
-        res.status(500).json({ message: "Server Error" })
+        res.status(500).json({ message: "Server error" })
     }
 }
 
