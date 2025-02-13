@@ -153,10 +153,11 @@ exports.listby = async (req, res) => {
     }
 }
 
+
 const handleQuery = async (req, res, query) => {
     try {
         //code
-        const result = await prisma.product.findMany({
+        const products = await prisma.product.findMany({
             where: {
                 title: {
                     contains: query,
@@ -166,19 +167,18 @@ const handleQuery = async (req, res, query) => {
                 category: true,
                 images: true
             }
+
         })
-        res.send(result)
+        res.send(products)
     } catch (err) {
+        //err
         console.log(err)
         res.status(500).json({ message: "Search Error" })
-
     }
 }
-
 const handlePrice = async (req, res, priceRange) => {
     try {
-        //code
-        const result = await prisma.product.findMany({
+        const products = await prisma.product.findMany({
             where: {
                 price: {
                     gte: priceRange[0],
@@ -190,17 +190,15 @@ const handlePrice = async (req, res, priceRange) => {
                 images: true
             }
         })
-        res.send(result)
+        res.send(products)
     } catch (err) {
         console.log(err)
-        res.status(500).json({ message: "Search Error" })
+        res.status(500).json({ message: 'Server Error ' })
     }
 }
-
 const handleCategory = async (req, res, categoryId) => {
     try {
-        //code
-        const result = await prisma.product.findMany({
+        const products = await prisma.product.findMany({
             where: {
                 categoryId: {
                     in: categoryId.map((id) => Number(id))
@@ -211,17 +209,18 @@ const handleCategory = async (req, res, categoryId) => {
                 images: true
             }
         })
-        res.send(result)
+        res.send(products)
     } catch (err) {
         console.log(err)
-        res.status(500).json({ message: "Search Error" })
+        res.status(500).json({ message: 'Server Error ' })
     }
 }
 
-exports.search = async (req, res) => {
+exports.searchFilters = async (req, res) => {
     try {
-        //code
+        // code
         const { query, category, price } = req.body
+
         if (query) {
             console.log('query-->', query)
             await handleQuery(req, res, query)
@@ -229,16 +228,20 @@ exports.search = async (req, res) => {
         if (category) {
             console.log('category-->', category)
             await handleCategory(req, res, category)
-        } if (price) {
+        }
+        if (price) {
             console.log('price-->', price)
             await handlePrice(req, res, price)
         }
-        // res.send("Search Product in controllers")
+
+        // res.send('Hello searchFilters Product')
     } catch (err) {
         console.log(err)
-        res.status(500).json({ message: "Server Error" })
+        res.status(500).json({ message: "Server error" })
     }
 }
+
+
 
  // Configuration
  cloudinary.config({ 
