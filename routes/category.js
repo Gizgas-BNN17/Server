@@ -8,7 +8,7 @@ const { create, list, remove } = require('../controllers/category')
 
 //router
 router.post('/category', authCheck, adminCheck, create)
-router.get('/category', authCheck, adminCheck, list)
+router.get('/category', list)
 router.delete('/category/:id', authCheck, adminCheck, remove)
 
 
