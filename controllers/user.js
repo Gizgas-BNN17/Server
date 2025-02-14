@@ -68,7 +68,7 @@ exports.userCart = async (req, res) => {
         //code
         console.log("-------------userCart-------------")
         const { card } = req.body
-        console.log(card)
+        console.log('Server card : ',card)
         console.log(req.user.id)
 
         const user = await prisma.user.findFirst({
