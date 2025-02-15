@@ -136,20 +136,21 @@ exports.remove = async (req, res) => {
 
 exports.listby = async (req, res) => {
     try {
+        // code
         const { sort, order, limit } = req.body
         console.log(sort, order, limit)
-        const listby = await prisma.product.findMany({
+        const products = await prisma.product.findMany({
             take: limit,
             orderBy: { [sort]: order },
-            include: {
+            include: { 
                 category: true,
-            }
-
+                images:true
+             }
         })
-        res.send(listby)
+        res.send(products)
     } catch (err) {
         console.log(err)
-        res.status(500).json({ message: "Server Error" })
+        res.status(500).json({ message: "Server error" })
     }
 }
 
