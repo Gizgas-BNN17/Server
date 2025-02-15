@@ -7,7 +7,7 @@ const { authCheck, adminCheck } = require('../middlewares/authCheck')
 const { payment } = require('../controllers/stripe')
 
 //router
-router.post('/payment/success', authCheck, adminCheck, payment)
+router.post('/create-checkout-session', authCheck, adminCheck, payment)
 
 
 module.exports = router

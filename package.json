@@ -20,6 +20,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
     "prisma": "^6.3.1",
-    "server": "file:"
+    "server": "file:",
+    "stripe": "^17.6.0"
   }
 }
